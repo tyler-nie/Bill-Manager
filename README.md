@@ -15,3 +15,13 @@ like to know how much they have spent with each other. This project is of intere
 group of friends and at different times we pay for different things.  I would like to know how much we owe each other  
 for those bills and one day be able to return how much we owe each other.  
 
+
+## User Stories
+- As a user I would like to view all entries
+- As a user I would like to join a group
+- As a user I would like to add/remove a person from a group
+- As a user I would like to see which groups I am in
+- As a user I would like to leave a group
+- As a user I would like to add a bill
+- As a user I would like to be able to see how much I owe someone else (in all groups if both in another group)
+- As a user I would like to be able to see how much someone owes me
