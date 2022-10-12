@@ -6,6 +6,7 @@ public class Person {
     private String name;
     private int id;
 
+    // Effects: creates a new person with name and an ID
     public Person(String name, int id) {
         this.name = name;
         this.id = id;
@@ -15,7 +16,7 @@ public class Person {
         return name;
     }
 
-    public int getId() {
+    public int getID() {
         return id;
     }
 
