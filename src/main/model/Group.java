@@ -69,7 +69,7 @@ public class Group {
 
     // Requires: id is an id in the list of Bills
     // Effects: Returns the share cost for one person in group who was part of the bill
-    // Assumes: only people who took part in said bill has the ID of said bill
+    // Assumes: only people who took part in said bill uses this function for a specific Bill
     public double billSplit(int id) {
         return bills.get(id).splitBill();
     }
