@@ -74,11 +74,13 @@ public class Group {
         double share = 0;
 
         if (isBillInGroup(id)) {
-            share = bills.get(id).splitBill();
-
+            if (bills.get(id).getNumberOfPeople() == 0) {
+                share = 0
+            } else {
+                share = bills.get(id).splitBill();
+            }
         }
         return share;
-
     }
 }
 

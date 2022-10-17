@@ -32,9 +32,6 @@ public class Bill {
     }
 
     public double splitBill() {
-        if (this.numberOfPeople == 0) {
-            return 0;
-        }
         return cost / numberOfPeople;
     }
 
