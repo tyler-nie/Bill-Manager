@@ -188,10 +188,13 @@ class GroupTest {
         g2.addBill(p2, 77.18, 2);
         g2.addBill(p1, 20.14, 2);
         g2.addBill(p1, 99.99, 9);
+        g2.addBill(p2, 50.43, 0);
 
         assertEquals(52.48, g2.billSplit(0));
         assertEquals(38.59, g2.billSplit(1));
         assertEquals(10.07, g2.billSplit(2));
         assertEquals(11.11, g2.billSplit(3));
+        assertEquals(0.00, g2.billSplit(5));
+
     }
 }

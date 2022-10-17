@@ -77,7 +77,6 @@ public class Group {
             share = bills.get(id).splitBill();
 
         }
-
         return share;
 
     }

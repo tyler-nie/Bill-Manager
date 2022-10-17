@@ -6,7 +6,7 @@ public class Bill {
     private int numberOfPeople;
     private double cost;
 
-    // Requires: cost > 0
+    // Requires: cost > 0, num >= 2
     // Effects: creates a bill with id, the id of person who paid the bill, the number of people, and the cost
     public Bill(int id, int personId, int num, double cost) {
         this.id = id;
@@ -32,6 +32,9 @@ public class Bill {
     }
 
     public double splitBill() {
+        if (this.numberOfPeople == 0) {
+            return 0;
+        }
         return cost / numberOfPeople;
     }
 
