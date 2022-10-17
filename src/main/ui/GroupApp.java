@@ -78,6 +78,7 @@ public class GroupApp {
         System.out.println("\tgs -> size of group");
         System.out.println("\tgb -> size of bills");
         System.out.println("\tbs -> bill split");
+        System.out.println("\tq -> quit");
     }
 
     //MODIFIES: group
