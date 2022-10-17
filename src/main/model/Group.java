@@ -75,7 +75,7 @@ public class Group {
 
         if (isBillInGroup(id)) {
             if (bills.get(id).getNumberOfPeople() == 0) {
-                share = 0
+                share = 0;
             } else {
                 share = bills.get(id).splitBill();
             }
