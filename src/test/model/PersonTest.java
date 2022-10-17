@@ -16,7 +16,7 @@ public class PersonTest {
         p2 = new Person("Kristelle", 20);
     }
     @Test
-    public void constructorTest() {
+    public void testConstructor() {
         assertEquals("Tyler", p1.getName());
         assertEquals(5, p1.getID());
         assertEquals("Kristelle", p2.getName());

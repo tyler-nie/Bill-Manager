@@ -25,7 +25,7 @@ class GroupTest {
     }
 
     @Test
-    public void constructorTest() {
+    public void testConstructor() {
         assertEquals(0, g1.numberOfPeople());
         assertEquals(0, g1.numberOfBills());
         assertEquals(0, g2.numberOfPeople());
@@ -37,7 +37,7 @@ class GroupTest {
     }
 
     @Test
-    public void addPersonTestOnePerson() {
+    public void testAddPersonOnePerson() {
 
         //Check for 1 person
         g1.addPerson("Jaime");
@@ -48,7 +48,7 @@ class GroupTest {
 
     }
     @Test
-    public void addPersonTestTwoPerson() {
+    public void testAddPersonTwoPerson() {
 
         // Check for entire list of 2
         g2.addPerson("Tyler");
@@ -64,7 +64,7 @@ class GroupTest {
 
     }
     @Test
-    public void addPersonTestNumerous() {
+    public void testAddPersonNumerous() {
         // Checking all for Persons > 2
         g3.addPerson("Jacob");
         g3.addPerson("Jeremy");
@@ -94,7 +94,7 @@ class GroupTest {
     }
 
     @Test
-    public void addBillTestOneBill() {
+    public void testAddBillOneBill() {
         Person p = new Person("Scott", 30);
         g1.addBill(p, 23.44, 2);
 
@@ -109,7 +109,7 @@ class GroupTest {
     }
 
     @Test
-    public void addBillTestTwoBills() {
+    public void testAddBillTwoBills() {
 
         Person p1 = new Person("Tyler", 5);
         Person p2 = new Person("Kristelle", 20);
@@ -133,7 +133,7 @@ class GroupTest {
     }
 
     @Test
-    public void addBillTestNumerousBills() {
+    public void testAddBillNumerousBills() {
 
         // For larger groups
         for (int i = 0; i < 100; i++) {
@@ -150,7 +150,7 @@ class GroupTest {
     }
 
     @Test
-    public void isPersonInGroupTest() {
+    public void testIsPersonInGroup() {
 
         for (int i = 0; i < 10; i++) {
             g4.addPerson(Integer.toString(i));
@@ -165,7 +165,7 @@ class GroupTest {
     }
 
     @Test
-    public void isBillInGroupTest() {
+    public void testIsBillInGroup() {
 
         for (int i = 0; i < 10; i++) {
             Person p = new Person(Integer.toString(i), i);
@@ -181,7 +181,7 @@ class GroupTest {
     }
 
     @Test
-    public void billSplitTest() {
+    public void testBillSplit() {
         Person p1 = new Person("Tyler", 5);
         Person p2 = new Person("Kristelle", 20);
         g2.addBill(p1, 104.96, 2);

@@ -18,7 +18,7 @@ public class BillTest {
         b3 = new Bill(101, 21, 13, 169.13);
     }
     @Test
-    public void constructorTest() {
+    public void testConstructor() {
         assertEquals(1, b1.getID());
         assertEquals(5, b1.getPersonID());
         assertEquals(4, b1.getNumberOfPeople());
@@ -36,7 +36,7 @@ public class BillTest {
     }
 
     @Test
-    public void splitBillTest() {
+    public void testSplitBill() {
         b1 = new Bill(5, 20, 2, 123.44);
         assertEquals(61.72, b1.splitBill());
 
