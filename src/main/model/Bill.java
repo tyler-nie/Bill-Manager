@@ -30,4 +30,10 @@ public class Bill {
     public double getCost() {
         return cost;
     }
+
+    public double splitBill() {
+        return cost / numberOfPeople;
+    }
+
+
 }

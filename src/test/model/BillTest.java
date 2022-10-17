@@ -35,20 +35,15 @@ public class BillTest {
         assertEquals(169.13, b3.getCost());
     }
 
-//    public void getIDTest() {
-//
-//    }
-//
-//    public void getPersonIDTest() {
-//
-//    }
-//
-//    public void getNumberOfPeopleTest() {
-//
-//    }
-//
-//    public void getCostTest() {
-//
-//    }
+    @Test
+    public void splitBillTest() {
+        b1 = new Bill(5, 20, 2, 123.44);
+        assertEquals(61.72, b1.splitBill());
 
+        b2 = new Bill(20, 5, 3, 69.69);
+        assertEquals(23.23, b2.splitBill());
+
+        b3 = new Bill(3, 14, 100, 100);
+        assertEquals(1, b3.splitBill());
+    }
 }

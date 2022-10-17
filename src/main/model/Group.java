@@ -1,9 +1,6 @@
 package model;
 
 
-import model.Bill;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Group {
@@ -19,11 +16,19 @@ public class Group {
     }
 
     // Modifies: This
-    // Effects: Adds a person to the group
+    // Effects: Adds a person to persons for the group
     public void addPerson(String name) {
         Person p = new Person(name, personID);
         persons.add(p);
         personID++;
+    }
+
+    // Modifies: This
+    // Effects: Adds a bill to the list of bills for the group
+    public void addBill(Person p, double cost, int num) {
+        Bill b = new Bill(billID, p.getID(), num, cost);
+        bills.add(b);
+        billID++;
     }
 
     public ArrayList<Person> getPersons() {
@@ -42,54 +47,39 @@ public class Group {
         return bills.size();
     }
 
-//    // Effects: Returns the value of the nextId for the next person added to the group
-//    public int idAssignmentPerson() {
-//        int nextId = 0;
-//
-//        for (Person person : persons) {
-//            int highest = 0;
-//            if (person.getId() > highest) {
-//                highest = person.getId();
-//            }
-//            nextId = highest++;
-//        }
-//        return nextId;
-//    }
-
-    // Modifies: This
-    // Effects: Adds a bill to the list of bills for the group
-    public void addBill(Person p, double cost, int num) {
-        Bill b = new Bill(billID, p.getID(), num, cost);
-        bills.add(b);
-        billID++;
+    // Effects: Checks if a person in the group has the certain ID
+    public boolean isPersonInGroup(int id) {
+        for (Person person: persons) {
+            if (person.getID() == id) {
+                return true;
+            }
+        }
+        return false;
     }
 
-    // Effects: Returns the value of the nextId for the next person added to the group
-//    public int idAssignmentBill() {
-//        int nextId = 0;
-//
-//        for (Bill bill : bills) {
-//            int highest = 0;
-//            if (bill.getId() > highest) {
-//                highest = bill.getId();
-//            }
-//            nextId = highest++;
-//        }
-//        return nextId;
-//    }
+    // Effects: Checks if a person in the group has the certain ID
+    public boolean isBillInGroup(int id) {
+        for (Bill bill: bills) {
+            if (bill.getID() == id) {
+                return true;
+            }
+        }
+        return false;
+    }
 
-    // Requires: id is in List of bills
-    // Modifies: This
-    // Effects: Adds a bill to the list of bills for the group
+    // Requires: id is an id in the list of Bills
+    // Effects: Returns the share cost for one person in group who was was part of the bill
     // Assumes: only people who took part in said bill has the ID of said bill
     public double billSplit(int id) {
         double share = 0;
-        for (Bill bill: bills) {
-            if (bill.getID() == id) {
-                share = bill.getCost() / bill.getNumberOfPeople();
-            }
+
+        if (isBillInGroup(id)) {
+            share = bills.get(id).splitBill();
+
         }
+
         return share;
+
     }
 }
 
