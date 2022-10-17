@@ -71,14 +71,7 @@ public class Group {
     // Effects: Returns the share cost for one person in group who was was part of the bill
     // Assumes: only people who took part in said bill has the ID of said bill
     public double billSplit(int id) {
-        double share = 0;
-
-        if (isBillInGroup(id)) {
-            if (bills.get(id).getNumberOfPeople() != 0) {
-                share = bills.get(id).splitBill();
-            }
-        }
-        return share;
+        return bills.get(id).splitBill();
     }
 }
 

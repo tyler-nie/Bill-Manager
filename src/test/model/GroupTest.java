@@ -195,8 +195,6 @@ class GroupTest {
         assertEquals(38.59, g2.billSplit(1));
         assertEquals(10.07, g2.billSplit(2));
         assertEquals(11.11, g2.billSplit(3));
-        assertEquals(0.00, g2.billSplit(4));
-        assertEquals(0.00, g2.billSplit(5));
 
     }
 }
