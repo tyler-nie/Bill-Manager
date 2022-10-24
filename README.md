@@ -17,19 +17,14 @@ for those bills and one day be able to return how much we owe each other.
 
 
 ## User Stories
-- As a user I would like to view all entries
-- As a user I would like to join a group
-- As a user I would like to add/remove a person from a group
-- As a user I would like to see which groups I am in
-- As a user I would like to leave a group
+- As a user I would like to view all bills
+- As a user I would like to join the group
 - As a user I would like to add a bill
-- As a user I would like to be able to see how much I owe someone else (in all groups if both in another group)
-- As a user I would like to be able to see how much someone owes me
 - As a user I would like all the people in the group
 - As a user I would like to see how many people are in the group
 - As a user I would like to see how many bills are in the group
 
 - As a user I would like to be able to save all the bills (with their information) 
-- and the people in their group (with their information)
+and the people in their group (with their information)
 - As a user I would like to be able save the bills and group so that I can come back to it another day and add more
-- information to the group
+information to the group
