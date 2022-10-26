@@ -1,18 +1,37 @@
 package model;
 
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.ArrayList;
 
-public class Group {
+public class Group implements Writable {
+    private String name;
     private ArrayList<Person> persons;
     private ArrayList<Bill> bills;
     private int personID = 0;
     private int billID = 0;
 
-    // Effects: creates a group with empty list of people and bills
+    // Effects: creates a group with empty list of people and bills and No name
     public Group() {
+        name = "No name";
         persons = new ArrayList<>();
         bills = new ArrayList<>();
+    }
+
+    //Effects: creates a group with empty list of people and bills with given Name
+    public Group(String name) {
+        this.name = name;
+        persons = new ArrayList<>();
+        bills = new ArrayList<>();
+    }
+
+    // Modifies: This
+    // Effects: Renames the group
+    public void rename(String name) {
+        this.name = name;
     }
 
     // Modifies: This
@@ -26,9 +45,13 @@ public class Group {
     // Modifies: This
     // Effects: Adds a bill to the list of bills for the group
     public void addBill(Person p, double cost, int num) {
-        Bill b = new Bill(billID, p.getID(), num, cost);
+        Bill b = new Bill(billID, p.getID(), cost, num);
         bills.add(b);
         billID++;
+    }
+
+    public String getGroupName() {
+        return name;
     }
 
     public ArrayList<Person> getPersons() {
@@ -73,5 +96,38 @@ public class Group {
     public double billSplit(int id) {
         return bills.get(id).splitBill();
     }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        json.put("people", personsInGroupToJson());
+        json.put("bills", billsInGroupToJson());
+        return json;
+    }
+
+    // EFFECTS: returns persons in this group as a JSON array
+    private JSONArray personsInGroupToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Person p : persons) {
+            jsonArray.put(p.toJson());
+        }
+
+        return jsonArray;
+    }
+
+    // EFFECTS: returns bills in this group as a JSON array
+    private JSONArray billsInGroupToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Bill b : bills) {
+            jsonArray.put(b.toJson());
+        }
+
+        return jsonArray;
+    }
 }
+
+
 

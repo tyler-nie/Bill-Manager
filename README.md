@@ -17,6 +17,7 @@ for those bills and one day be able to return how much we owe each other.
 
 
 ## User Stories
+- As a user I would like to name/rename the group
 - As a user I would like to view all bills
 - As a user I would like to join the group
 - As a user I would like to add a bill

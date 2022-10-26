@@ -1,8 +1,10 @@
 package model;
 
 import model.Bill;
+import org.json.JSONObject;
+import persistence.Writable;
 
-public class Person {
+public class Person implements Writable {
     private String name;
     private int id;
 
@@ -18,6 +20,13 @@ public class Person {
 
     public int getID() {
         return id;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        return json;
     }
 
 }

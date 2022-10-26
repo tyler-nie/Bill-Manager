@@ -1,6 +1,9 @@
 package model;
 
-public class Bill {
+import org.json.JSONObject;
+import persistence.Writable;
+
+public class Bill implements Writable {
     private int payeeId;
     private int id;
     private int numberOfPeople;
@@ -8,7 +11,7 @@ public class Bill {
 
     // Requires: cost > 0, num >= 2
     // Effects: creates a bill with id, the id of person who paid the bill, the number of people, and the cost
-    public Bill(int id, int personId, int num, double cost) {
+    public Bill(int id, int personId, double cost, int num) {
         this.id = id;
         this.payeeId = personId;
         this.numberOfPeople = num;
@@ -35,5 +38,14 @@ public class Bill {
         return cost / numberOfPeople;
     }
 
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("id", this.id);
+        json.put("payee id", this.payeeId);
+        json.put("number of people", this.numberOfPeople);
+        json.put("cost", this.cost);
+        return json;
+    }
 
 }

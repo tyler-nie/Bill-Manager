@@ -41,7 +41,9 @@ public class GroupApp {
     // MODIFIES: this
     // EFFECTS: processes user command
     private void processCommand(String command) {
-        if (command.equals("ap")) {
+        if (command.equals("ng")) {
+            doNameGroup();
+        } else if (command.equals("ap")) {
             doAddPerson();
         } else if (command.equals("ab")) {
             doAddBill();
@@ -71,6 +73,7 @@ public class GroupApp {
     // EFFECTS: displays menu of options to user
     private void displayMenu() {
         System.out.println("\nSelect from:");
+        System.out.println("\tng -> name the group");
         System.out.println("\tap -> add person");
         System.out.println("\tab -> add bill");
         System.out.println("\tp -> peoples");
@@ -79,6 +82,20 @@ public class GroupApp {
         System.out.println("\tgb -> size of bills");
         System.out.println("\tbs -> bill split");
         System.out.println("\tq -> quit");
+    }
+
+    //MODIFIES: group
+    //EFFECTS: renames the group
+    private void doNameGroup() {
+        System.out.println("Enter name of the group: ");
+        String name = input.next();
+
+        if (name.equals("") || name.equals(" ")) {
+            System.out.println("No name inputted");
+        } else {
+            group.rename(name);
+            System.out.println("The group name is now " + group.getGroupName());
+        }
     }
 
     //MODIFIES: group
