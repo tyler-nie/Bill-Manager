@@ -28,6 +28,10 @@ public class Group implements Writable {
         bills = new ArrayList<>();
     }
 
+    public String getName() {
+        return name;
+    }
+
     // Modifies: This
     // Effects: Renames the group
     public void rename(String name) {
@@ -60,6 +64,11 @@ public class Group implements Writable {
 
     public ArrayList<Bill> getBills() {
         return bills;
+    }
+
+    // Assumes the id exists in the group
+    public Bill getBill(int id) {
+        return bills.get(id);
     }
 
     public int numberOfPeople() {

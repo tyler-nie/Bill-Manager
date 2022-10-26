@@ -69,7 +69,7 @@ public class JsonReader {
     // MODIFIES: Group
     // EFFECTS: parses bills from JSON object and adds them to the group
     private void addBills(Group g, JSONObject jsonObject) {
-        JSONArray jsonArray = jsonObject.getJSONArray("people");
+        JSONArray jsonArray = jsonObject.getJSONArray("bills");
         for (Object json : jsonArray) {
             JSONObject nextBill = (JSONObject) json;
             addBill(g, nextBill);
@@ -81,7 +81,7 @@ public class JsonReader {
     private void addBill(Group g, JSONObject jsonObject) {
         int payeeId = jsonObject.getInt("payee id");
         int numOfPeople = jsonObject.getInt("number of people");
-        int cost = jsonObject.getInt("cost");
+        double cost = jsonObject.getDouble("cost");
         g.addBill(g.getPersons().get(payeeId), cost, numOfPeople);
     }
 }

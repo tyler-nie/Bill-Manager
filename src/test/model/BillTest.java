@@ -13,9 +13,9 @@ public class BillTest {
 
     @BeforeEach
     public void runBefore() {
-        b1 = new Bill(1, 5, 4, 20);
-        b2 = new Bill(3, 20, 2, 24.2);
-        b3 = new Bill(101, 21, 13, 169.13);
+        b1 = new Bill(1, 5, 20, 4);
+        b2 = new Bill(3, 20, 24.2, 2);
+        b3 = new Bill(101, 21, 169.13, 13);
     }
     @Test
     public void testConstructor() {
@@ -37,10 +37,10 @@ public class BillTest {
 
     @Test
     public void testSplitBill() {
-        b1 = new Bill(5, 20, 2, 123.44);
+        b1 = new Bill(5, 20, 123.44, 2);
         assertEquals(61.72, b1.splitBill());
 
-        b2 = new Bill(20, 5, 3, 69.69);
+        b2 = new Bill(20, 5, 69.69, 3);
         assertEquals(23.23, b2.splitBill());
 
         b3 = new Bill(3, 14, 100, 100);
