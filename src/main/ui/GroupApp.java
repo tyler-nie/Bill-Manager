@@ -47,6 +47,7 @@ public class GroupApp {
 
     // MODIFIES: this
     // EFFECTS: processes user command
+    @SuppressWarnings({"MethodLength", "checkstyle:SuppressWarnings"})
     private void processCommand(String command) {
         if (command.equals("ng")) {
             doNameGroup();
