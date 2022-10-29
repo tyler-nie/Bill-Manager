@@ -4,6 +4,8 @@ import model.Group;
 import model.Person;
 import model.Bill;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -19,19 +21,23 @@ class GroupTest {
     @BeforeEach
     public void runBefore() {
         g1 = new Group();
-        g2 = new Group();
-        g3 = new Group();
-        g4 = new Group();
+        g2 = new Group("Cute couple");
+        g3 = new Group("Blackpink");
+        g4 = new Group("CLC");
     }
 
     @Test
     public void testConstructor() {
+        assertEquals("No name", g1.getName());
         assertEquals(0, g1.numberOfPeople());
         assertEquals(0, g1.numberOfBills());
+        assertEquals("Cute couple", g2.getName());
         assertEquals(0, g2.numberOfPeople());
         assertEquals(0, g2.numberOfBills());
+        assertEquals("Blackpink", g3.getName());
         assertEquals(0, g3.numberOfPeople());
         assertEquals(0, g3.numberOfBills());
+        assertEquals("CLC", g4.getName());
         assertEquals(0, g4.numberOfPeople());
         assertEquals(0, g4.numberOfBills());
     }
@@ -195,6 +201,36 @@ class GroupTest {
         assertEquals(38.59, g2.billSplit(1));
         assertEquals(10.07, g2.billSplit(2));
         assertEquals(11.11, g2.billSplit(3));
+    }
 
+    @Test
+    public void testToJson() {
+        JSONObject jsonTest1 = g1.toJson();
+        JSONArray people1 = jsonTest1.getJSONArray("people");
+        JSONArray bills1 = jsonTest1.getJSONArray("bills");
+        assertEquals("No name", jsonTest1.getString("name"));
+        assertEquals(0, people1.length());
+        assertEquals(0, bills1.length());
+
+        JSONObject jsonTest2 = g2.toJson();
+        JSONArray people2 = jsonTest2.getJSONArray("people");
+        JSONArray bills2 = jsonTest2.getJSONArray("bills");
+        assertEquals("Cute couple", jsonTest2.getString("name"));
+        assertEquals(0, people1.length());
+        assertEquals(0, bills1.length());
+
+        JSONObject jsonTest3 = g3.toJson();
+        JSONArray people3 = jsonTest3.getJSONArray("people");
+        JSONArray bills3 = jsonTest3.getJSONArray("bills");
+        assertEquals("Blackpink", jsonTest3.getString("name"));
+        assertEquals(0, people1.length());
+        assertEquals(0, bills1.length());
+
+        JSONObject jsonTest4 = g4.toJson();
+        JSONArray people4 = jsonTest4.getJSONArray("people");
+        JSONArray bills4 = jsonTest4.getJSONArray("bills");
+        assertEquals("CLC", jsonTest4.getString("name"));
+        assertEquals(0, people1.length());
+        assertEquals(0, bills1.length());
     }
 }

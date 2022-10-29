@@ -1,6 +1,7 @@
 package model;
 
 import model.Bill;
+import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -45,5 +46,24 @@ public class BillTest {
 
         b3 = new Bill(3, 14, 100, 100);
         assertEquals(1, b3.splitBill());
+    }
+
+    @Test
+    public void testToJson() {
+        JSONObject jsonTest1 = b1.toJson();
+        assertEquals(1, jsonTest1.getInt("id"));
+        assertEquals(5, jsonTest1.getInt("payee id"));
+        assertEquals(4, jsonTest1.getInt("number of people"));
+        assertEquals(20, jsonTest1.getDouble("cost"));
+        JSONObject jsonTest2 = b2.toJson();
+        assertEquals(3, jsonTest2.getInt("id"));
+        assertEquals(20, jsonTest2.getInt("payee id"));
+        assertEquals(2, jsonTest2.getInt("number of people"));
+        assertEquals(24.2, jsonTest2.getDouble("cost"));
+        JSONObject jsonTest3 = b3.toJson();
+        assertEquals(101, jsonTest3.getInt("id"));
+        assertEquals(21, jsonTest3.getInt("payee id"));
+        assertEquals(13, jsonTest3.getInt("number of people"));
+        assertEquals(169.13, jsonTest3.getDouble("cost"));
     }
 }
