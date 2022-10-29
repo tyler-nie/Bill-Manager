@@ -116,13 +116,13 @@ public class GroupApp {
             System.out.println("No name inputted");
         } else {
             group.rename(name);
-            System.out.println("The group name is now " + group.getGroupName());
+            System.out.println("The group name is now " + group.getName());
         }
     }
 
     //EFFECTS: returns the name of the group
     private void groupName() {
-        System.out.println("The group name is " + group.getGroupName());
+        System.out.println("The group name is " + group.getName());
     }
 
     //MODIFIES: group

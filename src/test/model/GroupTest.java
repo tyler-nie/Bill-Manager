@@ -43,6 +43,13 @@ class GroupTest {
     }
 
     @Test
+    public void testRename() {
+        g1.rename("Cute couple");
+        String rename = g1.getName();
+        assertEquals("Cute couple",  rename);
+    }
+
+    @Test
     public void testAddPersonOnePerson() {
 
         //Check for 1 person
@@ -108,10 +115,10 @@ class GroupTest {
 
         ArrayList<Bill> bills = g1.getBills();
 
-        assertEquals(0, bills.get(0).getID());
-        assertEquals(30, bills.get(0).getPersonID());
-        assertEquals(2, bills.get(0).getNumberOfPeople());
-        assertEquals(23.44, bills.get(0).getCost());
+        assertEquals(0, g1.getBill(0).getID());
+        assertEquals(30, g1.getBill(0).getPersonID());
+        assertEquals(2, g1.getBill(0).getNumberOfPeople());
+        assertEquals(23.44, g1.getBill(0).getCost());
     }
 
     @Test
@@ -126,16 +133,15 @@ class GroupTest {
 
         ArrayList<Bill> bills = g2.getBills();
 
-        assertEquals(0, bills.get(0).getID());
-        assertEquals(5, bills.get(0).getPersonID());
-        assertEquals(2, bills.get(0).getNumberOfPeople());
-        assertEquals(104.95, bills.get(0).getCost());
+        assertEquals(0, g2.getBill(0).getID());
+        assertEquals(5, g2.getBill(0).getPersonID());
+        assertEquals(2, g2.getBill(0).getNumberOfPeople());
+        assertEquals(104.95, g2.getBill(0).getCost());
 
-        assertEquals(1, bills.get(1).getID());
-        assertEquals(20, bills.get(1).getPersonID());
-        assertEquals(2, bills.get(1).getNumberOfPeople());
-        assertEquals(77.18, bills.get(1).getCost());
-
+        assertEquals(1, g2.getBill(1).getID());
+        assertEquals(20, g2.getBill(1).getPersonID());
+        assertEquals(2, g2.getBill(1).getNumberOfPeople());
+        assertEquals(77.18, g2.getBill(1).getCost());
     }
 
     @Test

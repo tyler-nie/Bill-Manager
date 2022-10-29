@@ -54,10 +54,6 @@ public class Group implements Writable {
         billID++;
     }
 
-    public String getGroupName() {
-        return name;
-    }
-
     public ArrayList<Person> getPersons() {
         return persons;
     }
