@@ -173,8 +173,6 @@ class GroupTest {
         } catch (InvalidIdException e) {
             fail("Unexpected Invalid Id exception thrown");
         }
-
-
     }
 
     @Test
@@ -199,7 +197,16 @@ class GroupTest {
                 fail("Unexpected Invalid Id exception thrown");
             }
         }
+    }
 
+    @Test
+    public void testGetBillInvalidId() {
+        try {
+            Bill b = g1.getBill(3);
+            fail("Expected Exception not thrown");
+        } catch (InvalidIdException e) {
+            // All good!
+        }
     }
 
     @Test
@@ -214,7 +221,6 @@ class GroupTest {
         }
         assertFalse(g4.isPersonInGroup(10));
         assertFalse(g4.isPersonInGroup(100));
-
     }
 
     @Test
@@ -231,10 +237,20 @@ class GroupTest {
 
         for (int j = 0; j < g4.numberOfBills(); j++) {
             try {
-                assertTrue(g4.isBillInGroup(j));
+                g4.isBillInGroup(j);
             } catch (InvalidIdException e) {
                 fail("Unexpected Invalid Id exception thrown");
             }
+        }
+    }
+
+    @Test
+    public void testIsBillInGroupValidInvalidID() {
+        try {
+            g4.isBillInGroup(20);
+            fail("expected Invalid Id Exception not thrown");
+        } catch (InvalidIdException e) {
+            // All good
         }
     }
 
@@ -244,35 +260,10 @@ class GroupTest {
         Person p2 = new Person("Kristelle", 20);
         try {
             g2.addBill(p1, 104.96, 2);
-        } catch (NegativeAmountException e) {
-            fail("Unexpected Negative Amount Exception Thrown");
-        }
-
-        try {
             g2.addBill(p2, 77.18, 2);
-        } catch (NegativeAmountException e) {
-            fail("Unexpected Negative Amount Exception Thrown");
-        }
-
-        try {
             g2.addBill(p1, 20.14, 2);
-        } catch (NegativeAmountException e) {
-            fail("Unexpected Negative Amount Exception Thrown");
-        }
-
-        try {
             g2.addBill(p1, 99.99, 9);
-        } catch (NegativeAmountException e) {
-            fail("Unexpected Negative Amount Exception Thrown");
-        }
-
-        try {
             g2.addBill(p2, 50.43, 0);
-        } catch (NegativeAmountException e) {
-            fail("Unexpected Negative Amount Exception Thrown");
-        }
-
-        try {
             g2.addBill(p2, 0.00, 4);
         } catch (NegativeAmountException e) {
             fail("Unexpected Negative Amount Exception Thrown");
