@@ -1,5 +1,6 @@
 package model;
 
+import exceptions.NegativeAmountException;
 import org.json.JSONObject;
 import persistence.Writable;
 

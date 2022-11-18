@@ -1,5 +1,6 @@
 package persistence;
 
+import exceptions.NegativeAmountException;
 import model.Group;
 import model.Bill;
 import model.Person;
@@ -49,8 +50,19 @@ public class JsonWriterTest extends JsonTest{
             Group g = new Group("Cute Couple");
             g.addPerson("Tyler");
             g.addPerson("Kristelle");
-            g.addBill(g.getPersons().get(0), 20.42, 2);
-            g.addBill(g.getPersons().get(1), 20.50, 3);
+
+            try {
+                g.addBill(g.getPersons().get(0), 20.42, 2);
+            } catch (NegativeAmountException e) {
+                fail("Unexpected Negative Amount Exception Thrown");
+            }
+
+            try {
+                g.addBill(g.getPersons().get(1), 20.50, 3);
+            } catch (NegativeAmountException e) {
+                fail("Unexpected Negative Amount Exception Thrown");
+            }
+
             JsonWriter writer = new JsonWriter("./data/testWriterGeneralGroup.json");
             writer.open();
             writer.write(g);

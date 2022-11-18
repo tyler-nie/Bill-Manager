@@ -1,5 +1,6 @@
 package persistence;
 
+import exceptions.NegativeAmountException;
 import model.Group;
 import model.Bill;
 import model.Person;
@@ -82,6 +83,11 @@ public class JsonReader {
         int payeeId = jsonObject.getInt("payee id");
         int numOfPeople = jsonObject.getInt("number of people");
         double cost = jsonObject.getDouble("cost");
-        g.addBill(g.getPersons().get(payeeId), cost, numOfPeople);
+        try {
+            g.addBill(g.getPersons().get(payeeId), cost, numOfPeople);
+        } catch (NegativeAmountException e) {
+            // Does nothing as the inputted value would have already been checked for whether it was
+            // negative or not
+        }
     }
 }

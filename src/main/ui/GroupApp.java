@@ -1,5 +1,7 @@
 package ui;
 
+import exceptions.InvalidIdException;
+import exceptions.NegativeAmountException;
 import model.Group;
 import model.Bill;
 import model.Person;
@@ -152,7 +154,11 @@ public class GroupApp {
             int numOfPeople = input.nextInt();
 
             ArrayList<Person>  persons = group.getPersons();
-            group.addBill(persons.get(id), cost, numOfPeople);
+            try {
+                group.addBill(persons.get(id), cost, numOfPeople);
+            } catch (NegativeAmountException e) {
+                System.out.println("Negative Amount Inputted");
+            }
             int billID = group.numberOfBills();
             System.out.println("The Bill has been added to the group of bills with id: " + (billID - 1));
         } else {
@@ -201,10 +207,16 @@ public class GroupApp {
             ArrayList<Bill> bills = group.getBills();
             ArrayList<Person> person = group.getPersons();
 
-            String name = person.get(group.getBill(id).getPersonID()).getName();
 
-            System.out.println("The bill with id was payed by " + name + ", includes "
-                    + group.getBill(id).getNumberOfPeople() + " people and costed $" + group.getBill(id).getCost());
+            try {
+                String name = person.get(group.getBill(id).getPersonID()).getName();
+
+                System.out.println("The bill with id was payed by " + name + ", includes "
+                        + group.getBill(id).getNumberOfPeople() + " people and costed $" + group.getBill(id).getCost());
+            } catch (InvalidIdException e) {
+                System.out.println("Invalid Id inputted");
+            }
+
         }
     }
 

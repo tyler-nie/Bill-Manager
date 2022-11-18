@@ -1,5 +1,7 @@
 package model;
 
+import exceptions.InvalidIdException;
+import exceptions.NegativeAmountException;
 import model.Group;
 import model.Person;
 import model.Bill;
@@ -109,16 +111,38 @@ class GroupTest {
     @Test
     public void testAddBillOneBill() {
         Person p = new Person("Scott", 30);
-        g1.addBill(p, 23.44, 2);
+        try {
+            g1.addBill(p, 23.44, 2);
+        } catch (NegativeAmountException e) {
+            fail("Unexpected Negative Amount Exception Thrown");
+        }
 
         assertEquals(1, g1.numberOfBills());
 
         ArrayList<Bill> bills = g1.getBills();
 
-        assertEquals(0, g1.getBill(0).getID());
-        assertEquals(30, g1.getBill(0).getPersonID());
-        assertEquals(2, g1.getBill(0).getNumberOfPeople());
-        assertEquals(23.44, g1.getBill(0).getCost());
+        try {
+            assertEquals(0, g1.getBill(0).getID());
+            assertEquals(30, g1.getBill(0).getPersonID());
+            assertEquals(2, g1.getBill(0).getNumberOfPeople());
+            assertEquals(23.44, g1.getBill(0).getCost());
+        } catch (InvalidIdException e) {
+            fail("Unexpected Invalid Id Exception Thrown");
+        }
+    }
+
+    @Test
+    public void testAddNegativeValueBill() {
+        Person p1 = new Person("Tyler", 5);
+        Person p2 = new Person("Kristelle", 20);
+
+        try {
+            g1.addBill(p1, -320.514, 2);
+            fail("Expected negative amount exception not thrown");
+        } catch (NegativeAmountException e) {
+            // Success
+            System.out.println("Negative value entered");
+        }
     }
 
     @Test
@@ -126,22 +150,29 @@ class GroupTest {
 
         Person p1 = new Person("Tyler", 5);
         Person p2 = new Person("Kristelle", 20);
-        g2.addBill(p1, 104.95, 2);
-        g2.addBill(p2, 77.18, 2);
+        try {
+            g2.addBill(p1, 104.95, 2);
+            g2.addBill(p2, 77.18, 2);
+        } catch (NegativeAmountException e) {
+            fail("Unexpected Negative Amount Exception Thrown");
+        }
 
         assertEquals(2, g2.numberOfBills());
 
         ArrayList<Bill> bills = g2.getBills();
+        try {
+            assertEquals(0, g2.getBill(0).getID());
+            assertEquals(5, g2.getBill(0).getPersonID());
+            assertEquals(2, g2.getBill(0).getNumberOfPeople());
+            assertEquals(104.95, g2.getBill(0).getCost());
 
-        assertEquals(0, g2.getBill(0).getID());
-        assertEquals(5, g2.getBill(0).getPersonID());
-        assertEquals(2, g2.getBill(0).getNumberOfPeople());
-        assertEquals(104.95, g2.getBill(0).getCost());
-
-        assertEquals(1, g2.getBill(1).getID());
-        assertEquals(20, g2.getBill(1).getPersonID());
-        assertEquals(2, g2.getBill(1).getNumberOfPeople());
-        assertEquals(77.18, g2.getBill(1).getCost());
+            assertEquals(1, g2.getBill(1).getID());
+            assertEquals(20, g2.getBill(1).getPersonID());
+            assertEquals(2, g2.getBill(1).getNumberOfPeople());
+            assertEquals(77.18, g2.getBill(1).getCost());
+        } catch (InvalidIdException e) {
+            fail("Unexpected Invalid Id Exception Thrown");
+        }
     }
 
     @Test
@@ -150,7 +181,11 @@ class GroupTest {
         // For larger groups
         for (int i = 0; i < 100; i++) {
             Person p = new Person(Integer.toString(i), i);
-            g3.addBill(p, i+10, 4);
+            try {
+                g3.addBill(p, i+10, 4);
+            } catch (NegativeAmountException e) {
+                fail("Unexpected Negative Amount Exception Thrown");
+            }
         }
         assertEquals(100, g3.numberOfBills());
 
@@ -181,7 +216,11 @@ class GroupTest {
 
         for (int i = 0; i < 10; i++) {
             Person p = new Person(Integer.toString(i), i);
-            g4.addBill(p, i+10, 4);
+            try {
+                g4.addBill(p, i+10, 4);
+            } catch (NegativeAmountException e) {
+                fail("Unexpected Negative Amount Exception Thrown");
+            }
         }
 
         for (int j = 0; j < g4.numberOfBills(); j++) {
@@ -196,13 +235,41 @@ class GroupTest {
     public void testBillSplit() {
         Person p1 = new Person("Tyler", 5);
         Person p2 = new Person("Kristelle", 20);
-        g2.addBill(p1, 104.96, 2);
-        g2.addBill(p2, 77.18, 2);
-        g2.addBill(p1, 20.14, 2);
-        g2.addBill(p1, 99.99, 9);
-        g2.addBill(p2, 50.43, 0);
-        g2.addBill(p2, 0.00, 4);
+        try {
+            g2.addBill(p1, 104.96, 2);
+        } catch (NegativeAmountException e) {
+            fail("Unexpected Negative Amount Exception Thrown");
+        }
 
+        try {
+            g2.addBill(p2, 77.18, 2);
+        } catch (NegativeAmountException e) {
+            fail("Unexpected Negative Amount Exception Thrown");
+        }
+
+        try {
+            g2.addBill(p1, 20.14, 2);
+        } catch (NegativeAmountException e) {
+            fail("Unexpected Negative Amount Exception Thrown");
+        }
+
+        try {
+            g2.addBill(p1, 99.99, 9);
+        } catch (NegativeAmountException e) {
+            fail("Unexpected Negative Amount Exception Thrown");
+        }
+
+        try {
+            g2.addBill(p2, 50.43, 0);
+        } catch (NegativeAmountException e) {
+            fail("Unexpected Negative Amount Exception Thrown");
+        }
+
+        try {
+            g2.addBill(p2, 0.00, 4);
+        } catch (NegativeAmountException e) {
+            fail("Unexpected Negative Amount Exception Thrown");
+        }
         assertEquals(52.48, g2.billSplit(0));
         assertEquals(38.59, g2.billSplit(1));
         assertEquals(10.07, g2.billSplit(2));

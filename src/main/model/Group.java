@@ -1,6 +1,8 @@
 package model;
 
 
+import exceptions.InvalidIdException;
+import exceptions.NegativeAmountException;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import persistence.Writable;
@@ -48,10 +50,17 @@ public class Group implements Writable {
 
     // Modifies: This
     // Effects: Adds a bill to the list of bills for the group
-    public void addBill(Person p, double cost, int num) {
+    public void addBill(Person p, double cost, int num) throws NegativeAmountException {
+        if (!validCost(cost)) {
+            throw new NegativeAmountException();
+        }
         Bill b = new Bill(billID, p.getID(), cost, num);
         bills.add(b);
         billID++;
+    }
+
+    public boolean validCost(double cost) {
+        return cost >= 0;
     }
 
     public ArrayList<Person> getPersons() {
@@ -62,8 +71,10 @@ public class Group implements Writable {
         return bills;
     }
 
-    // Assumes the id exists in the group
-    public Bill getBill(int id) {
+    public Bill getBill(int id) throws InvalidIdException {
+        if (!isBillInGroup(id)) {
+            throw new InvalidIdException();
+        }
         return bills.get(id);
     }
 

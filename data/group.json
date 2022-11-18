@@ -1,13 +1,21 @@
 {
-    "name": "Cutest Couple Ever",
-    "bills": [{
-        "cost": 25.42,
-        "number of people": 2,
-        "id": 0,
-        "payee id": 0
-    }],
+    "name": "Idk",
+    "bills": [
+        {
+            "cost": 20,
+            "number of people": 2,
+            "id": 0,
+            "payee id": 0
+        },
+        {
+            "cost": 100,
+            "number of people": 4,
+            "id": 1,
+            "payee id": 1
+        }
+    ],
     "people": [
         {"name": "Tyler"},
-        {"name": "Kristelle"}
+        {"name": "Bhavesh"}
     ]
 }
