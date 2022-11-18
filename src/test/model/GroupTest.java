@@ -200,9 +200,32 @@ class GroupTest {
     }
 
     @Test
-    public void testGetBillInvalidId() {
+    public void testGetBillValid() {
+        Person p1 = new Person("Tyler", 5);
+        try {
+            g1.addBill(p1, 23.3, 2);
+            Bill b = g1.getBill(0);
+        } catch (InvalidIdException e) {
+            fail("Unexpected Invalid Id exception thrown");
+        } catch (NegativeAmountException e) {
+            fail("Unexpected Negative Amount exception thrown");
+        }
+    }
+
+    @Test
+    public void testGetBillInvalidIdNotInList() {
         try {
             Bill b = g1.getBill(3);
+            fail("Expected Exception not thrown");
+        } catch (InvalidIdException e) {
+            // All good!
+        }
+    }
+
+    @Test
+    public void testGetBillInvalidIdNegative() {
+        try {
+            Bill b = g1.getBill(-3);
             fail("Expected Exception not thrown");
         } catch (InvalidIdException e) {
             // All good!

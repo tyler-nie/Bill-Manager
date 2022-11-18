@@ -39,6 +39,8 @@ public class JsonWriterTest extends JsonTest{
             assertEquals("Test Group", g.getName());
             assertEquals(0, g.numberOfPeople());
             assertEquals(0, g.numberOfBills());
+        } catch (NegativeAmountException e) {
+            fail("Unexpected Negative Amount Exception Thrown");
         } catch (IOException e) {
             fail("Exception should not have been thrown");
         }
@@ -80,7 +82,8 @@ public class JsonWriterTest extends JsonTest{
             assertEquals(2, bills.size());
             checkBill(0,0,2,20.42, bills.get(0));
             checkBill(1,1,3,20.50, bills.get(1));
-
+        } catch (NegativeAmountException e) {
+            fail("Unexpected Negative Amount Exception Thrown");
         } catch (IOException e) {
             fail("Exception should not have been thrown\"");
         }

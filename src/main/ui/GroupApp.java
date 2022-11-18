@@ -271,6 +271,8 @@ public class GroupApp {
         try {
             group = jsonReader.read();
             System.out.println("Loaded " + group.getName() + " from " + JSON_STORE);
+        } catch (NegativeAmountException e) {
+            System.out.println("Negative Value inputted");
         } catch (IOException e) {
             System.out.println("Unable to read from file: " + JSON_STORE);
         }

@@ -24,10 +24,14 @@ public class JsonReader {
 
     // EFFECTS: reads group from file and returns it;
     // throws IOException if an error occurs reading data from file
-    public Group read() throws IOException {
+    public Group read() throws IOException, NegativeAmountException {
         String jsonData = readFile(source);
         JSONObject jsonObject = new JSONObject(jsonData);
-        return parseGroup(jsonObject);
+        try {
+            return parseGroup(jsonObject);
+        } catch (NegativeAmountException e) {
+            throw new NegativeAmountException();
+        }
     }
 
     // EFFECTS: reads source file as string and returns it
@@ -42,11 +46,15 @@ public class JsonReader {
     }
 
     // EFFECTS: parses group from JSON object and returns it
-    private Group parseGroup(JSONObject jsonObject) {
+    private Group parseGroup(JSONObject jsonObject) throws NegativeAmountException {
         String name = jsonObject.getString("name");
         Group g = new Group(name);
         addPersons(g, jsonObject);
-        addBills(g, jsonObject);
+        try {
+            addBills(g, jsonObject);
+        } catch (NegativeAmountException e) {
+            throw new NegativeAmountException();
+        }
         return g;
     }
 
@@ -69,25 +77,28 @@ public class JsonReader {
 
     // MODIFIES: Group
     // EFFECTS: parses bills from JSON object and adds them to the group
-    private void addBills(Group g, JSONObject jsonObject) {
+    private void addBills(Group g, JSONObject jsonObject) throws NegativeAmountException {
         JSONArray jsonArray = jsonObject.getJSONArray("bills");
         for (Object json : jsonArray) {
             JSONObject nextBill = (JSONObject) json;
-            addBill(g, nextBill);
+            try {
+                addBill(g, nextBill);
+            } catch (NegativeAmountException e) {
+                throw new NegativeAmountException();
+            }
         }
     }
 
     // MODIFIES: Group
     // EFFECTS: parses bill from JSON object and adds it to the group
-    private void addBill(Group g, JSONObject jsonObject) {
+    private void addBill(Group g, JSONObject jsonObject) throws NegativeAmountException {
         int payeeId = jsonObject.getInt("payee id");
         int numOfPeople = jsonObject.getInt("number of people");
         double cost = jsonObject.getDouble("cost");
         try {
             g.addBill(g.getPersons().get(payeeId), cost, numOfPeople);
         } catch (NegativeAmountException e) {
-            // Does nothing as the inputted value would have already been checked for whether it was
-            // negative or not
+            throw new NegativeAmountException();
         }
     }
 }

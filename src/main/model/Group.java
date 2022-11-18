@@ -59,8 +59,12 @@ public class Group implements Writable {
         billID++;
     }
 
-    public boolean validCost(double cost) {
-        return cost >= 0;
+    public boolean validCost(double cost) throws NegativeAmountException {
+        if (cost >= 0) {
+            return true;
+        } else {
+            throw new NegativeAmountException();
+        }
     }
 
     public ArrayList<Person> getPersons() {
