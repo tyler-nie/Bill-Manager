@@ -14,14 +14,17 @@ public class GroupManagerWindow extends JFrame {
     private JsonReader jsonReader;
     private JFrame window;
 
+    //EFFECTS: Starts
     public GroupManagerWindow() {
         runGroup();
     }
+
 
     private void runGroup() {
         init();
     }
 
+    //EFFECTS: Initializes
     private void init() {
         group = new Group();
         jsonWriter = new JsonWriter(JSON_STORE);

@@ -240,16 +240,15 @@ public class GroupApp {
         System.out.println("Please provide the billID you were a part of: ");
         int id = input.nextInt();
 
-        if (group.isBillInGroup(id)) {
-
+        try {
+            boolean validId = group.isBillInGroup(id);
             double split = group.billSplit(id);
             System.out.println("Your share of this bill is " + split);
             int personId = bills.get(id).getPersonID();
             String name = persons.get(personId).getName();
 
             System.out.println("Therefore you owe " + name + " " + split + " dollars.");
-
-        } else {
+        } catch (InvalidIdException e) {
             System.out.println("That is not a valid bill ID.");
         }
     }

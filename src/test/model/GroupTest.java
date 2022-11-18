@@ -171,8 +171,10 @@ class GroupTest {
             assertEquals(2, g2.getBill(1).getNumberOfPeople());
             assertEquals(77.18, g2.getBill(1).getCost());
         } catch (InvalidIdException e) {
-            fail("Unexpected Invalid Id Exception Thrown");
+            fail("Unexpected Invalid Id exception thrown");
         }
+
+
     }
 
     @Test
@@ -191,7 +193,11 @@ class GroupTest {
 
         // Checks if ID's are assigned correctly
         for (int j = 0; j < g3.numberOfBills(); j++) {
-            assertTrue(g3.isBillInGroup(j));
+            try {
+                assertTrue(g3.isBillInGroup(j));
+            } catch (InvalidIdException e) {
+                fail("Unexpected Invalid Id exception thrown");
+            }
         }
 
     }
@@ -212,7 +218,7 @@ class GroupTest {
     }
 
     @Test
-    public void testIsBillInGroup() {
+    public void testIsBillInGroupValid() {
 
         for (int i = 0; i < 10; i++) {
             Person p = new Person(Integer.toString(i), i);
@@ -224,11 +230,12 @@ class GroupTest {
         }
 
         for (int j = 0; j < g4.numberOfBills(); j++) {
-            assertTrue(g4.isBillInGroup(j));
+            try {
+                assertTrue(g4.isBillInGroup(j));
+            } catch (InvalidIdException e) {
+                fail("Unexpected Invalid Id exception thrown");
+            }
         }
-        assertFalse(g4.isBillInGroup(10));
-        assertFalse(g4.isBillInGroup(100));
-
     }
 
     @Test

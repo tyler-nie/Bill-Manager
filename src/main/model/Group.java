@@ -97,13 +97,13 @@ public class Group implements Writable {
     }
 
     // Effects: Checks if a person in the group has the certain ID
-    public boolean isBillInGroup(int id) {
+    public boolean isBillInGroup(int id) throws InvalidIdException {
         for (Bill bill: bills) {
             if (bill.getID() == id) {
                 return true;
             }
         }
-        return false;
+        throw new InvalidIdException();
     }
 
     // Requires: id is an id in the list of Bills
