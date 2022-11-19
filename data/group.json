@@ -1,21 +1,5 @@
 {
-    "name": "Idk",
-    "bills": [
-        {
-            "cost": 20,
-            "number of people": 2,
-            "id": 0,
-            "payee id": 0
-        },
-        {
-            "cost": 100,
-            "number of people": 4,
-            "id": 1,
-            "payee id": 1
-        }
-    ],
-    "people": [
-        {"name": "Tyler"},
-        {"name": "Bhavesh"}
-    ]
+    "name": "My Group",
+    "bills": [],
+    "people": []
 }
