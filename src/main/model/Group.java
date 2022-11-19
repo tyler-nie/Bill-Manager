@@ -44,7 +44,6 @@ public class Group implements Writable {
     // Effects: Adds a person to persons for the group
     public void addPerson(String name) {
         Person p = new Person(name, personID);
-        EventLog.getInstance().logEvent(new Event("Added person " + p.getName() + " to group."));
         persons.add(p);
         personID++;
     }
@@ -56,7 +55,6 @@ public class Group implements Writable {
             throw new NegativeAmountException();
         }
         Bill b = new Bill(billID, p.getID(), cost, num);
-        EventLog.getInstance().logEvent(new Event("Added bill with id" + b.getID() + " to group."));
         bills.add(b);
         billID++;
     }
@@ -85,12 +83,10 @@ public class Group implements Writable {
     }
 
     public int numberOfPeople() {
-        EventLog.getInstance().logEvent(new Event("Counted " + persons.size() + " people in group"));
         return persons.size();
     }
 
     public int numberOfBills() {
-        EventLog.getInstance().logEvent(new Event("Counted " + bills.size() + " bills in group"));
         return bills.size();
     }
 

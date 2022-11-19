@@ -1,8 +1,6 @@
 package ui;
 
 import exceptions.NegativeAmountException;
-import model.EventLog;
-import model.Event;
 import model.*;
 import persistence.JsonReader;
 import persistence.JsonWriter;
@@ -16,6 +14,7 @@ import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class GroupManagerWindow extends JFrame {
     private static final String JSON_SOURCE = "./data/group.json";
@@ -68,18 +67,25 @@ public class GroupManagerWindow extends JFrame {
 
     // Modifies: this
     // Effects: initializes main page and adds buttons to main page for group app
+    @SuppressWarnings({"MethodLength", "checkstyle:SuppressWarnings"})
     public void initialize() {
         main = new JPanel();
         main.setLayout(null);
         main.setBackground(new Color(0x807F80));
         window.setContentPane(main);
+
         personPane = new JScrollPane();
+        personPane.setVisible(true);
+        personPane.setBounds(400, 0, 200, 1000);
+
         billPane = new JScrollPane();
+        billPane.setVisible(true);
+        billPane.setBounds(600, 0, 350, 1000);
 
         billModel = new DefaultTableModel();
         billModel.addColumn("Bill ID");
         billModel.addColumn("Payee ID");
-        billModel.addColumn("# of People for Bill");
+        billModel.addColumn("# of People");
         billModel.addColumn("Cost");
 
         peopleModel = new DefaultTableModel();
@@ -122,11 +128,16 @@ public class GroupManagerWindow extends JFrame {
     // Modifies: this
     // Effects: displays People and the details of each person
     public void displayPeople(DefaultTableModel model) {
-        for (Person p : group.getPersons()) {
-            model.addRow(new Object[]{Integer.toString(p.getID()), p.getName()});
+        String[] columnNames = {"Person Id", "Person Name"};
+        Object[][] data = new Object[group.getPersons().size()][2];
+        ArrayList<Person> people = group.getPersons();
+        for (int i = 0; i < people.size(); i++) {
+            data[i][0] = people.get(i).getID();
+            data[i][1] = people.get(i).getName();
         }
-        peopleTable = new JTable(model);
+        peopleTable = new JTable(data, columnNames);
         personPane.add(peopleTable);
+        peopleTable.setFillsViewportHeight(true);
         personPane.setViewportView(peopleTable);
         window.add(personPane);
     }
@@ -139,14 +150,15 @@ public class GroupManagerWindow extends JFrame {
         addNewPerson.addActionListener(e -> {
             JPanel addPersonPanel = new JPanel();
             JTextField nameField = new JTextField(20);
-
             addPersonPanel.add(new JLabel("What is the name of the person?"));
             addPersonPanel.add(nameField);
             int dialog = JOptionPane.showConfirmDialog(null, addPersonPanel,
                     "Person Name", JOptionPane.OK_CANCEL_OPTION);
-
             if (dialog == JOptionPane.OK_OPTION) {
                 group.addPerson(nameField.getText());
+                personPane.repaint();
+                window.remove(personPane);
+                displayPeople(peopleModel);
             }
         });
         addNewPerson.setBounds(alignX, 350, buttonWidth, buttonHeight);
@@ -156,12 +168,20 @@ public class GroupManagerWindow extends JFrame {
     // Modifies: this
     // Effects: displays bills and the details of the bill
     public void displayBills(DefaultTableModel model) {
-        for (Bill b : group.getBills()) {
-            model.addRow(new Object[]{Integer.toString(b.getID()), Integer.toString(b.getPersonID()),
-                    Integer.toString(b.getNumberOfPeople()), Double.toString(b.getCost())});
+        String[] columnNames = {"Bill ID", "Payee ID", "# of People", "Cost"};
+        Object[][] data = new Object[group.getBills().size()][4];
+        ArrayList<Bill> bills = group.getBills();
+        for (int i = 0; i < bills.size(); i++) {
+            data[i][0] = bills.get(i).getID();
+            data[i][1] = bills.get(i).getPersonID();
+            data[i][2] = bills.get(i).getNumberOfPeople();
+            data[i][3] = bills.get(i).getCost();
+
         }
-        billsTable = new JTable(model);
+        billsTable = new JTable(data, columnNames);
         billPane.add(billsTable);
+        billsTable.setFillsViewportHeight(true);
+        billPane.setViewportView(billsTable);
         window.add(billPane);
     }
 
@@ -198,6 +218,9 @@ public class GroupManagerWindow extends JFrame {
                         group.addBill(payee,
                                 Double.parseDouble(costField.getText()),
                                 Integer.parseInt(numField.getText()));
+                        billPane.repaint();
+                        window.remove(billPane);
+                        displayBills(billModel);
                     } catch (NegativeAmountException nae) {
                         //Do nothing
                     }
@@ -243,9 +266,6 @@ public class GroupManagerWindow extends JFrame {
         JButton yesButton = new JButton("Yes");
         JButton quitButton = new JButton("No");
         quitButton.addActionListener(e -> {
-            for (Event event : EventLog.getInstance()) {
-                System.out.println(event.toString());
-            }
             System.exit(0);
         });
         yesButton.addActionListener(e1 -> {
@@ -286,6 +306,8 @@ public class GroupManagerWindow extends JFrame {
         try {
             jsonReader = new JsonReader(JSON_SOURCE);
             group = jsonReader.read();
+            displayPeople(peopleModel);
+            displayBills(billModel);
             return "Loaded Group from " + JSON_SOURCE + ",";
         } catch (Exception e) {
             return "Unable to read from the file " + JSON_SOURCE;

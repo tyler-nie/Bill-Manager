@@ -1,5 +1,13 @@
 {
     "name": "My Group",
-    "bills": [],
-    "people": []
+    "bills": [{
+        "cost": 20,
+        "number of people": 2,
+        "id": 0,
+        "payee id": 0
+    }],
+    "people": [
+        {"name": "Tyler"},
+        {"name": "Kristelle"}
+    ]
 }
