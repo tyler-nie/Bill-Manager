@@ -7,6 +7,7 @@ import persistence.JsonWriter;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.border.Border;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
@@ -15,6 +16,8 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+
+import static javax.swing.BorderFactory.createLineBorder;
 
 public class GroupManagerWindow extends JFrame {
     private static final String JSON_SOURCE = "./data/group.json";
@@ -25,6 +28,7 @@ public class GroupManagerWindow extends JFrame {
     private JFrame window;
     private static final int WIDTH = 1000;
     private static final int HEIGHT = 1000;
+    private static final Border BORDER = createLineBorder(Color.BLACK, 2);
 
     private final int buttonWidth = 300;
     private final int buttonHeight = 50;
@@ -77,10 +81,12 @@ public class GroupManagerWindow extends JFrame {
         personPane = new JScrollPane();
         personPane.setVisible(true);
         personPane.setBounds(400, 0, 200, 1000);
+        personPane.setBorder(BORDER);
 
         billPane = new JScrollPane();
         billPane.setVisible(true);
         billPane.setBounds(600, 0, 350, 1000);
+        billPane.setBorder(BORDER);
 
         billModel = new DefaultTableModel();
         billModel.addColumn("Bill ID");

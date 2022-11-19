@@ -30,3 +30,16 @@ for those bills and one day be able to return how much we owe each other.
 and the people in their group (with their information)
 - As a user I would like to be able save the bills and group so that I can come back to it another day and add more
 information to the group
+
+# Instructions for Grader
+- You can generate the first required event related to adding Xs to a Y by clicking the add Person Button
+and inputting a name and clicking OK
+- You can generate the second required event related to adding Xs to a Y by clicking the add Person Button
+and inputting a name and clicking OK
+- You can also generate the first required event related to adding Xs to a Y by clicking the add Bill Button 
+and filling in the information asked and clicking OK
+- You can also generate the second required event related to adding Xs to a Y by clicking the add Bill Button
+and filling in the information asked and clicking OK
+- You can locate my visual component by looking at the top left of the window
+- You can save the state of my application by clicking the save program button
+- You can reload the state of my application by clicking the load program button
