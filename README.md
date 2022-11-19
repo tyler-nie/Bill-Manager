@@ -32,6 +32,7 @@ and the people in their group (with their information)
 information to the group
 
 # Instructions for Grader
+- Run Main in the UI Class to begin
 - You can generate the first required event related to adding Xs to a Y by clicking the add Person Button
 and inputting a name and clicking OK
 - You can generate the second required event related to adding Xs to a Y by clicking the add Person Button

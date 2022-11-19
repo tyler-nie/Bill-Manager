@@ -177,7 +177,6 @@ class GroupTest {
 
     @Test
     public void testAddBillNumerousBills() {
-
         // For larger groups
         for (int i = 0; i < 100; i++) {
             Person p = new Person(Integer.toString(i), i);
