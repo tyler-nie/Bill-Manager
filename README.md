@@ -44,3 +44,12 @@ and filling in the information asked and clicking OK
 - You can locate my visual component by looking at the top left of the window
 - You can save the state of my application by clicking the save program button
 - You can reload the state of my application by clicking the load program button
+
+## Phase 4: Task 2
+
+- Fri Dec 02 18:00:26 PST 2022
+- Added Person with name 'Tyler' and ID 0to My Group.
+- Fri Dec 02 18:00:32 PST 2022
+- Added Person with name 'Bhavesh' and ID 1to My Group.
+- Fri Dec 02 18:00:43 PST 2022
+- Added Bill with ID 0 with cost 25.0 and 2 many people to My Group.

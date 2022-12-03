@@ -1,13 +1,13 @@
 {
     "name": "My Group",
     "bills": [{
-        "cost": 20,
+        "cost": 25,
         "number of people": 2,
         "id": 0,
         "payee id": 0
     }],
     "people": [
         {"name": "Tyler"},
-        {"name": "Kristelle"}
+        {"name": "Bhavesh"}
     ]
 }

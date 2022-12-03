@@ -45,7 +45,10 @@ public class Group implements Writable {
     public void addPerson(String name) {
         Person p = new Person(name, personID);
         persons.add(p);
+        EventLog.getInstance().logEvent(new Event("Added Person with name '" + name + "' and ID " + personID
+                + " to " + this.name + "."));
         personID++;
+
     }
 
     // Modifies: This
@@ -56,6 +59,8 @@ public class Group implements Writable {
         }
         Bill b = new Bill(billID, p.getID(), cost, num);
         bills.add(b);
+        EventLog.getInstance().logEvent(new Event("Added Bill with ID " + billID + " with cost " + cost
+                + " and " + num + " many people" + " to " + this.name + "."));
         billID++;
     }
 
@@ -83,10 +88,12 @@ public class Group implements Writable {
     }
 
     public int numberOfPeople() {
+        EventLog.getInstance().logEvent(new Event("Found " + persons.size() + " people in the group"));
         return persons.size();
     }
 
     public int numberOfBills() {
+        EventLog.getInstance().logEvent(new Event("Found " + bills.size() + " bills in the group"));
         return bills.size();
     }
 
@@ -114,6 +121,7 @@ public class Group implements Writable {
     // Effects: Returns the share cost for one person in group who was part of the bill
     // Assumes: only people who took part in said bill uses this function for a specific Bill
     public double billSplit(int id) {
+        EventLog.getInstance().logEvent(new Event("Split bill with ID " + id + "."));
         return bills.get(id).splitBill();
     }
 

@@ -1,7 +1,9 @@
 package ui;
 
+import exceptions.InvalidIdException;
 import exceptions.NegativeAmountException;
 import model.*;
+import model.Event;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
@@ -115,12 +117,13 @@ public class GroupManagerWindow extends JFrame {
     public void addButtons() {
         addPersonButton();
         addBillButton();
+        addSplitButton();
         addSaveButton();
         addLoadButton();
 
         JButton quitButton = new JButton("Quit Program");
         quitButton.addActionListener(e -> saveGroupDialog());
-        quitButton.setBounds(alignX, 550, buttonWidth, buttonHeight);
+        quitButton.setBounds(alignX, 600, buttonWidth, buttonHeight);
         main.add(quitButton);
     }
 
@@ -241,25 +244,53 @@ public class GroupManagerWindow extends JFrame {
     }
 
     // Modifies: this, main
-    // Effects: adds save button to main page
-    private void addSaveButton() {
-        JButton b3 = new JButton("Save Program");
+    // Effects: adds split Bill button to main page
+    private void addSplitButton() {
+        JButton b3 = new JButton("Split Bill");
         b3.setBounds(alignX, 450, buttonWidth, buttonHeight);
         b3.addActionListener(e -> {
-            JOptionPane.showMessageDialog(window, new JLabel(saveGroup()));
+            JPanel splitBillPanel = new JPanel();
+            JTextField idField = new JTextField(20);
+            splitBillPanel.add(new JLabel("What is the bill ID?"));
+            splitBillPanel.add(idField);
+            int dialog = JOptionPane.showConfirmDialog(null, splitBillPanel,
+                    "Bill ID", JOptionPane.OK_CANCEL_OPTION);
+            if (dialog == JOptionPane.OK_OPTION) {
+                try {
+                    if (group.isBillInGroup(Integer.parseInt(idField.getText()))) {
+                        group.getBill(Integer.parseInt(idField.getText())).splitBill();
+                        JOptionPane.showMessageDialog(splitBillPanel, new JLabel("Each person owes $"
+                                + group.getBill(Integer.parseInt(idField.getText())).splitBill()));
+                    }
+                } catch (InvalidIdException iie) {
+                    JOptionPane.showMessageDialog(null,
+                            "Bill with this ID does not exist.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
         });
         main.add(b3);
     }
 
     // Modifies: this, main
-    // Effects: adds load button to main page
-    private void addLoadButton() {
-        JButton b4 = new JButton("Load Program");
+    // Effects: adds save button to main page
+    private void addSaveButton() {
+        JButton b4 = new JButton("Save Program");
         b4.setBounds(alignX, 500, buttonWidth, buttonHeight);
         b4.addActionListener(e -> {
-            JOptionPane.showMessageDialog(window, new JLabel(loadGroup()));
+            JOptionPane.showMessageDialog(window, new JLabel(saveGroup()));
         });
         main.add(b4);
+    }
+
+    // Modifies: this, main
+    // Effects: adds load button to main page
+    private void addLoadButton() {
+        JButton b5 = new JButton("Load Program");
+        b5.setBounds(alignX, 550, buttonWidth, buttonHeight);
+        b5.addActionListener(e -> {
+            JOptionPane.showMessageDialog(window, new JLabel(loadGroup()));
+        });
+        main.add(b5);
     }
 
     // Modifies: this
@@ -272,6 +303,9 @@ public class GroupManagerWindow extends JFrame {
         JButton yesButton = new JButton("Yes");
         JButton quitButton = new JButton("No");
         quitButton.addActionListener(e -> {
+            for (Event event : EventLog.getInstance()) {
+                System.out.println(event.toString());
+            }
             System.exit(0);
         });
         yesButton.addActionListener(e1 -> {
@@ -285,7 +319,7 @@ public class GroupManagerWindow extends JFrame {
     }
     
     // Modifies: this, quit
-    // Effects: tries to save group in the current state and prints result aas a string
+    // Effects: tries to save group in the current state and prints result as a string
     private void saveAndQuitResult(JButton quit) {
         JDialog jd = new JDialog();
         jd.setLayout(new FlowLayout());
