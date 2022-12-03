@@ -1,0 +1,21 @@
+{
+    "name": "Cute Couple",
+    "bills": [
+        {
+            "cost": 20.42,
+            "number of people": 2,
+            "id": 0,
+            "payee id": 0
+        },
+        {
+            "cost": 20.5,
+            "number of people": 3,
+            "id": 1,
+            "payee id": 1
+        }
+    ],
+    "people": [
+        {"name": "Tyler"},
+        {"name": "Kristelle"}
+    ]
+}
