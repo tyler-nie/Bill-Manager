@@ -53,3 +53,10 @@ and filling in the information asked and clicking OK
 - Added Person with name 'Bhavesh' and ID 1to My Group.
 - Fri Dec 02 18:00:43 PST 2022
 - Added Bill with ID 0 with cost 25.0 and 2 many people to My Group.
+
+## Phase 4: Task 3
+If time what refactoring could I have done:
+
+- For my GUI Class, I would have liked to split it into separate classes
+- I would have liked to implement more groups so that I could follow an Observer pattern as I feel it would have
+- followed my program intentions better

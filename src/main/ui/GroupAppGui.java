@@ -21,7 +21,7 @@ import java.util.ArrayList;
 
 import static javax.swing.BorderFactory.createLineBorder;
 
-public class GroupApp extends JFrame {
+public class GroupAppGui extends JFrame {
     private static final String JSON_SOURCE = "./data/group.json";
     private Group group;
     private JsonWriter jsonWriter;
@@ -45,7 +45,7 @@ public class GroupApp extends JFrame {
     private JTable billsTable;
 
     /// Effects: initializes the GUI
-    public GroupApp() {
+    public GroupAppGui() {
         startUp();
         mainPage();
     }
