@@ -1,4 +1,4 @@
-# My Personal Project for CPSC 210
+# My Personal Project
 
 ## Project Description and Overview
 

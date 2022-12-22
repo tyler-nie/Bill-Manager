@@ -1,5 +1,5 @@
 package exceptions;
 
-public class InvalidIdException extends Exception {
+public abstract class InvalidIdException extends Exception {
 
 }
