@@ -2,7 +2,7 @@
 
 ## Project Description and Overview
 
-**For my term project, I will be creating a group bill manager.**  
+**For this project, I will be creating a group bill manager.**  
 The application will basically take entries of bills for a group.  
 The app would be able to split it among the group (by ratio) and keep track of who owes who within a group.  
 For example you have a group of four with people, “A”, “B”, “C”, and “D”, and person A pays for one bill.  
